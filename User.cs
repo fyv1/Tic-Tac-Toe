@@ -16,7 +16,7 @@ namespace TicTacToe
         public int Choice { get => choice; set => choice = value; }
         public int Id { get => id; set => id = value; }
 
-        public void whosTurn()
+        public void whoseTurn()
         {
             if (Id % 2 == 0) Console.Write("Kolej gracza 1: ");
             else Console.Write("Kolej gracza 2: ");

@@ -14,12 +14,12 @@ namespace TicTacToe
         {
             Description();
             CreateGrid(uAr);
-            u.whosTurn();
+            u.whoseTurn();
             u.getUserChoice();
             changeArrayElement(u);
         }
 
-        public void CreateGrid(char[] uAr)
+        private void CreateGrid(char[] uAr)
         {
             Console.WriteLine("     |     |      ");
             Console.WriteLine("  {0}  |  {1}  |  {2}", uAr[1], uAr[2], uAr[3]);
@@ -62,7 +62,7 @@ namespace TicTacToe
             Console.Clear();
             Description();
             CreateGrid(uAr);
-            u.whosTurn();
+            u.whoseTurn();
             u.getUserChoice();
             changeArrayElement(u);
         }
