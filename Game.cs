@@ -12,14 +12,14 @@ namespace TicTacToe
         private bool isOver = false;
         private bool isTie = false;
 
-        public bool IsOver { get => isOver; set => isOver = value; }
+        public bool IsOver { get => isOver;  set => isOver = value; }
         public bool IsTie { get => isTie; set => isTie = value; }
 
         public Game(User u)
         {
             Description();
             CreateGrid();
-            u.whoseTurn();
+            whoseTurn(u);
             u.getUserChoice();
             changeArrayElement(u);
         }
@@ -40,28 +40,37 @@ namespace TicTacToe
 
         private void changeArrayElement(User u)
         {
-            if (u.Choice > 0 && u.Choice < 10)
-            { 
-                if (uAr[u.Choice] != 'X' && uAr[u.Choice] != 'O')
+
+            if (isOver != true)
+            {
+                if (u.Choice > 0 && u.Choice < 10)
                 {
-                    
-                    if (u.Id % 2 == 0)
-                        uAr[u.Choice] = 'X';
+                    if (uAr[u.Choice] != 'X' && uAr[u.Choice] != 'O')
+                    {
+
+                        if (u.Id % 2 == 0)
+                            uAr[u.Choice] = 'X';
+                        else
+                            uAr[u.Choice] = 'O';
+
+                        u.Id++;
+                        refreshDisplay(u);
+                        u.getUserChoice();
+                        checkIfWon(u);
+
+                    }
                     else
-                        uAr[u.Choice] = 'O';
+                    {
+                        Console.WriteLine("Pole o nr {0} jest juz zajete znakiem {1}", u.Choice, uAr[u.Choice]);
+                        refreshDisplay(u);
+                        u.getUserChoice();
+                        checkIfWon(u);
+                    }
 
-                    u.Id++;
-                    refreshDisplay(u);
-                    u.getUserChoice();
-                    checkIfWon(u);
-
-                } else
-                {
-                    Console.WriteLine("Pole o nr {0} jest juz zajete znakiem {1}", u.Choice, uAr[u.Choice]);
                 }
-
+                else throw new ArgumentOutOfRangeException("Zakres ID planszy to 1-9!");
             }
-            else throw new ArgumentOutOfRangeException("Zakres ID planszy to 1-9!");
+            else throw new Exception("Gra zakonczona!");
         }
 
         private void Description()
@@ -77,12 +86,21 @@ namespace TicTacToe
             Description();
             CreateGrid();
             checkIfWon(u);
-            u.whoseTurn();
+            whoseTurn(u);
             u.getUserChoice();
             changeArrayElement(u);
 
         }
 
+        private void whoseTurn(User u)
+        {
+            if (!IsOver)
+            {
+                if (u.Id % 2 == 0) Console.Write("Kolej gracza 1: ");
+                else Console.Write("Kolej gracza 2: ");
+            }
+            else Console.ReadKey();
+        }
 
         private void checkIfWon(User u)
         {
