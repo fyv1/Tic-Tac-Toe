@@ -9,17 +9,22 @@ namespace TicTacToe
     class Game
     {
         private char[] uAr = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
+        private bool isOver = false;
+        private bool isTie = false;
 
-        public Game(User u) 
+        public bool IsOver { get => isOver; set => isOver = value; }
+        public bool IsTie { get => isTie; set => isTie = value; }
+
+        public Game(User u)
         {
             Description();
-            CreateGrid(uAr);
+            CreateGrid();
             u.whoseTurn();
             u.getUserChoice();
             changeArrayElement(u);
         }
 
-        private void CreateGrid(char[] uAr)
+        private void CreateGrid()
         {
             Console.WriteLine("     |     |      ");
             Console.WriteLine("  {0}  |  {1}  |  {2}", uAr[1], uAr[2], uAr[3]);
@@ -36,18 +41,27 @@ namespace TicTacToe
         private void changeArrayElement(User u)
         {
             if (u.Choice > 0 && u.Choice < 10)
-            {
-                if (u.Id % 2 == 0)
-                     uAr[u.Choice] = 'X';
-                else
-                    uAr[u.Choice] = 'O';
-                
-                u.Id++;
-                refreshDisplay(u);
-                u.getUserChoice();
+            { 
+                if (uAr[u.Choice] != 'X' && uAr[u.Choice] != 'O')
+                {
+                    
+                    if (u.Id % 2 == 0)
+                        uAr[u.Choice] = 'X';
+                    else
+                        uAr[u.Choice] = 'O';
+
+                    u.Id++;
+                    refreshDisplay(u);
+                    u.getUserChoice();
+                    checkIfWon(u);
+
+                } else
+                {
+                    Console.WriteLine("Pole o nr {0} jest juz zajete znakiem {1}", u.Choice, uAr[u.Choice]);
+                }
 
             }
-            else Console.Write("Zakres ID planszy to 1-9!"); //throw new ArgumentOutOfRangeException("Zakres ID planszy to 1-9!");
+            else throw new ArgumentOutOfRangeException("Zakres ID planszy to 1-9!");
         }
 
         private void Description()
@@ -61,10 +75,58 @@ namespace TicTacToe
         {
             Console.Clear();
             Description();
-            CreateGrid(uAr);
+            CreateGrid();
+            checkIfWon(u);
             u.whoseTurn();
             u.getUserChoice();
             changeArrayElement(u);
+
+        }
+
+
+        private void checkIfWon(User u)
+        {
+            if(uAr[1] == uAr[2] && uAr[2] == uAr[3]) //Pierwszy wiersz
+            {
+                IsOver = true;
+                Console.Write("Wygral gracz {0}", u.Id % 2);
+            }
+            else if(uAr[4] == uAr[5] && uAr[5] == uAr[6]) //Drugi wiersz
+            {
+                IsOver = true;
+                Console.Write("Wygral gracz {0}", u.Id % 2);
+            }
+            else if(uAr[7] == uAr[8] && uAr[8] == uAr[9]) //Trzeci wiersz
+            {
+                IsOver = true;
+                Console.Write("Wygral gracz {0}", u.Id % 2);
+            }
+            else if(uAr[1] == uAr[4] && uAr[4] == uAr[7]) //Pierwsza kolumna
+            {
+                IsOver = true;
+                Console.Write("Wygral gracz {0}", u.Id % 2);
+            }
+            else if(uAr[2] == uAr[5] && uAr[5] == uAr[8]) //Druga kolumna
+            {
+                IsOver = true;
+                Console.Write("Wygral gracz {0}", u.Id % 2);
+            }
+            else if(uAr[3] == uAr[6] && uAr[6] == uAr[9]) //Trzecia kolumna
+            {
+                IsOver = true;
+                Console.Write("Wygral gracz {0}", u.Id % 2);
+            }
+            else if(uAr[1] == uAr[5] && uAr[5] == uAr[9]) //Skos 1
+            {
+                IsOver = true;
+                Console.Write("Wygral gracz {0}", u.Id % 2);
+            }
+            else if(uAr[3] == uAr[5] && uAr[5] == uAr[7]) //Skos 2
+            {
+                IsOver = true;
+                Console.Write("Wygral gracz {0}", u.Id % 2);
+            }
+
         }
 
     }
