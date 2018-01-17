@@ -16,10 +16,9 @@ namespace TicTacToe
         public int Choice { get => choice; set => choice = value; }
         public int Id { get => id; set => id = value; }
 
-        
         public void getUserChoice()
         {
-            Choice = Convert.ToInt32(Console.ReadLine()); //TODO exception
+            Choice = Convert.ToInt32(Console.ReadLine());
         }
     }
 }
