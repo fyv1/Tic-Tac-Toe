@@ -23,7 +23,7 @@ namespace TicTacToe
         }
         public void getUserChoice()
         {
-            Choice = Convert.ToInt32(Console.ReadLine());
+            Choice = Convert.ToInt32(Console.ReadLine()); //TODO exception
         }
     }
 }
