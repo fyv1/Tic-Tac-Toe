@@ -13,9 +13,6 @@ namespace TicTacToe
             User u = new User();
             Game g = new Game(u);
 
-
-
-            Console.ReadKey();
         }
     }
 }
