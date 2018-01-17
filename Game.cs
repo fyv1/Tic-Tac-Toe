@@ -105,47 +105,17 @@ namespace TicTacToe
 
             if (winnerId == 0) winnerId = 2;
 
-            if(uAr[1] == uAr[2] && uAr[2] == uAr[3]) //Pierwszy wiersz
+            if(uAr[1] == uAr[2] && uAr[2] == uAr[3] || //Pierwszy wiersz
+               uAr[4] == uAr[5] && uAr[5] == uAr[6] || //Drugi wiersz
+               uAr[7] == uAr[8] && uAr[8] == uAr[9] || //Trzeci wiersz
+               uAr[1] == uAr[4] && uAr[4] == uAr[7] || //Pierwsza kolumna
+               uAr[2] == uAr[5] && uAr[5] == uAr[8] || //Druga kolumna
+               uAr[3] == uAr[6] && uAr[6] == uAr[9]  ) //Trzecia kolumna
             {
                 IsOver = true;
                 Console.Write("Wygral gracz {0}", winnerId);
             }
-            else if(uAr[4] == uAr[5] && uAr[5] == uAr[6]) //Drugi wiersz
-            {
-                IsOver = true;
-                Console.Write("Wygral gracz {0}", winnerId);
-            }
-            else if(uAr[7] == uAr[8] && uAr[8] == uAr[9]) //Trzeci wiersz
-            {
-                IsOver = true;
-                Console.Write("Wygral gracz {0}", winnerId);
-            }
-            else if(uAr[1] == uAr[4] && uAr[4] == uAr[7]) //Pierwsza kolumna
-            {
-                IsOver = true;
-                Console.Write("Wygral gracz {0}", winnerId);
-            }
-            else if(uAr[2] == uAr[5] && uAr[5] == uAr[8]) //Druga kolumna
-            {
-                IsOver = true;
-                Console.Write("Wygral gracz {0}", winnerId);
-            }
-            else if(uAr[3] == uAr[6] && uAr[6] == uAr[9]) //Trzecia kolumna
-            {
-                IsOver = true;
-                Console.Write("Wygral gracz {0}", winnerId);
-            }
-            else if(uAr[1] == uAr[5] && uAr[5] == uAr[9]) //Skos 1
-            {
-                IsOver = true;
-                Console.Write("Wygral gracz {0}", winnerId);
-            }
-            else if(uAr[3] == uAr[5] && uAr[5] == uAr[7]) //Skos 2
-            {
-                IsOver = true;
-                Console.Write("Wygral gracz {0}", winnerId);
-            }
-            else if (uAr[1] != '1' && uAr[2] != '2' && uAr[3] != '3' && uAr[4] != '4' && uAr[5] != '5' && uAr[6] != '6' && uAr[7] != '7' && uAr[8] != '8' && uAr[9] != '9') //Remis
+            else if (uAr[1] != '1' && uAr[2] != '2' && uAr[3] != '3' && uAr[4] != '4' && uAr[5] != '5' && uAr[6] != '6' && uAr[7] != '7' && uAr[8] != '8' && uAr[9] != '9') ) //Remis
             {
                 IsOver = true;
                 Console.Write("Remis!");
